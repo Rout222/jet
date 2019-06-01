@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using XF_JetAPI.Models;
 using XF_JetAPI.Services;
 using System.Collections.ObjectModel;
+using XF_JetAPI.Views;
 
 namespace XF_JetAPI
 {
@@ -23,24 +24,19 @@ namespace XF_JetAPI
         }
         private async void AtualizaDados()
         {
-            //p = await dataService.GetProdutosAsync();
-            produtoLista.ItemsSource = new ObservableCollection<Produto>(await dataService.GetProdutosAsync());
+            p = await dataService.GetProdutosAsync();
+            produtoLista.ItemsSource = new ObservableCollection<Produto>(p);
         }
-        private void Procurar_TextChanged(object sender, TextChangedEventArgs e)
+        public void OnEditar(object sender, EventArgs e)
         {
-            produtoLista.ItemsSource = this.Listar(this.sbProcurar.Text);
+            var mi = ((MenuItem)sender);
+            DisplayAlert("More Context Action", mi.CommandParameter + " more context action", "OK");
         }
 
-        public IEnumerable<Listagem<string, Produto>> Listar(string filtro = "")
+        public async void OnVer(object sender, EventArgs e)
         {
-            IEnumerable<Produto> produtosFiltrados = this.p;
-
-            if (!string.IsNullOrEmpty(filtro))
-                produtosFiltrados = p.Where(l => (l.Nome.ToLower().Contains(filtro.ToLower())) || l.Status.ToLower().Contains(filtro.ToLower()));
-            return from produto in produtosFiltrados
-                   orderby produto.Nome
-                   group produto by produto.Status into grupos
-                   select new Listagem<string, Produto>(grupos.Key, grupos);
+            var mi = ((MenuItem)sender);
+            await Navigation.PushAsync(new ProdutoView(mi.CommandParameter.ToString()));
         }
     }
 }

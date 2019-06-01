@@ -20,6 +20,10 @@ namespace JetAPI.Controllers
             if (_context.Produtos.Count() == 0)
             {
                 _context.Produtos.Add(new Produtos { Codigo = 1111, Nome = "Primeiro produto", Preco = 5.5f, Status = "Em estoque" });
+                _context.Produtos.Add(new Produtos { Codigo = 2222, Nome = "Segundo produto", Preco = 5.5f, Status = "Em estoque" });
+                _context.Produtos.Add(new Produtos { Codigo = 3333, Nome = "Terceiro produto", Preco = 5.5f, Status = "Em estoque" });
+                _context.Produtos.Add(new Produtos { Codigo = 4444, Nome = "Quarto produto", Preco = 5.5f, Status = "Em estoque" });
+                _context.Produtos.Add(new Produtos { Codigo = 5555, Nome = "Quinto produto", Preco = 5.5f, Status = "Em estoque" });
                 _context.SaveChanges();
             }
         }

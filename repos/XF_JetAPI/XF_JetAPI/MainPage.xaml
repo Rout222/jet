@@ -7,15 +7,21 @@
 
     <StackLayout Orientation="Vertical">
         <Label Text="Lista de Produtos" TextColor="Red" />
-        <SearchBar x:Name="sbProcurar" Placeholder="Procurar..." TextChanged="Procurar_TextChanged"/>
         <ListView x:Name="produtoLista" Margin="5" 
                   HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Nome}" 
-                                       Detail="{Binding Preco, StringFormat='R{0:c}'}" 
-                                       TextColor="Black" DetailColor="Blue"/>
-                    />
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="OnVer" CommandParameter="{Binding Id}"
+               Text="Ver" />
+                            <MenuItem Clicked="OnEditar" CommandParameter="{Binding Id}"
+               Text="Editar" IsDestructive="True" />
+                        </ViewCell.ContextActions>
+                        <StackLayout Padding="15,0">
+                            <Label Text="{Binding Nome}" />
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
