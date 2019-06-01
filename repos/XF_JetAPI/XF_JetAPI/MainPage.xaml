@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XF_JetAPI"
+             x:Class="XF_JetAPI.MainPage"
+             BackgroundColor="White">
+
+    <StackLayout Orientation="Vertical">
+        <Label Text="Lista de Produtos" TextColor="Red" />
+        <SearchBar x:Name="sbProcurar" Placeholder="Procurar..." TextChanged="Procurar_TextChanged"/>
+        <ListView x:Name="produtoLista" Margin="5" 
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Nome}" 
+                                       Detail="{Binding Preco, StringFormat='R{0:c}'}" 
+                                       TextColor="Black" DetailColor="Blue"/>
+                    />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
