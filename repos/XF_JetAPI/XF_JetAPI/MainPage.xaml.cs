@@ -21,22 +21,24 @@ namespace XF_JetAPI
             InitializeComponent();
             dataService = new DataService();
             AtualizaDados();
+            produtoLista.RefreshCommand = new Command(() => {
+                 //Do your stuff.    
+                 AtualizaDados();
+                 produtoLista.IsRefreshing = false;
+             });
         }
-        private async void AtualizaDados()
+        public async void AtualizaDados()
         {
             p = await dataService.GetProdutosAsync();
             produtoLista.ItemsSource = new ObservableCollection<Produto>(p);
         }
-        public void OnEditar(object sender, EventArgs e)
-        {
-            var mi = ((MenuItem)sender);
-            DisplayAlert("More Context Action", mi.CommandParameter + " more context action", "OK");
-        }
 
-        public async void OnVer(object sender, EventArgs e)
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var mi = ((MenuItem)sender);
-            await Navigation.PushAsync(new ProdutoView(mi.CommandParameter.ToString()));
+            ListView lv = (ListView)sender;
+            Produto p = (Produto)lv.SelectedItem;
+            await Navigation.PushAsync(new ProdutoView(p.Id));
+            AtualizaDados();
         }
     }
 }

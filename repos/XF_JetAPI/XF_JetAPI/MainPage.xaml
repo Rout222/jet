@@ -8,20 +8,10 @@
     <StackLayout Orientation="Vertical">
         <Label Text="Lista de Produtos" TextColor="Red" />
         <ListView x:Name="produtoLista" Margin="5" 
-                  HasUnevenRows="True">
-            <ListView.ItemTemplate>
+                  HasUnevenRows="True" ItemSelected="OnItemSelected" IsPullToRefreshEnabled="True">
+            <ListView.ItemTemplate  >
                 <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.ContextActions>
-                            <MenuItem Clicked="OnVer" CommandParameter="{Binding Id}"
-               Text="Ver" />
-                            <MenuItem Clicked="OnEditar" CommandParameter="{Binding Id}"
-               Text="Editar" IsDestructive="True" />
-                        </ViewCell.ContextActions>
-                        <StackLayout Padding="15,0">
-                            <Label Text="{Binding Nome}" />
-                        </StackLayout>
-                    </ViewCell>
+                    <TextCell Text="{Binding Nome}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

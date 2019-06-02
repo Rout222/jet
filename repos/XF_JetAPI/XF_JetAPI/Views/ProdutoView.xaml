@@ -1,14 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="XF_JetAPI.Views.ProdutoView">
-  <ContentView.Content>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="Nome" />
-            <Label Text="{Binding Nome}" />
-        </StackLayout>
-  </ContentView.Content>
-</ContentView>
+    <StackLayout Padding="20" Spacing="10">
+        <Label Text="Nome" />
+        <Entry Placeholder="Nome do produto..." x:Name="entryNome" VerticalOptions="Start" HorizontalOptions="FillAndExpand"/>
+        <Label Text="Preço" />
+        <Entry Placeholder="Preço do produto..." x:Name="entryPreco" VerticalOptions="Start" HorizontalOptions="FillAndExpand"/>
+        <Label Text="Status" />
+        <Entry Placeholder="Status do produto..." x:Name="entryStats" VerticalOptions="Start" HorizontalOptions="FillAndExpand"/>
+        <Label Text="Codigo" />
+        <Entry Placeholder="Codigo do produto..." x:Name="entryCodigo" VerticalOptions="Start" HorizontalOptions="FillAndExpand"/>
+        <Button Text="Salvar"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="Salvar" />
+    </StackLayout>
+</ContentPage>

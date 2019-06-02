@@ -19,7 +19,7 @@ namespace XF_JetAPI.Services
             var produtos = JsonConvert.DeserializeObject<ObservableCollection<Produto>>(response);
             return produtos;
         }
-        public async Task<Produto> GetProdutoAsync(string id)
+        public async Task<Produto> GetProdutoAsync(long id)
         {
             var response = await client.GetStringAsync(string.Concat("http://192.168.0.104:3000/api/", id));
             var produtos = JsonConvert.DeserializeObject<Produto>(response);
@@ -42,13 +42,12 @@ namespace XF_JetAPI.Services
         /// </summary>
         /// <param name="id"> do Item.</param>
         /// <param name="p">Item a atualizar.</param>
-        public async Task<int> UpdateProdutoAsync(int id, Produto p)
+        public async void UpdateProdutoAsync(long id, Produto p)
         {
             var data = JsonConvert.SerializeObject(p);
             var content = new StringContent(data, Encoding.UTF8, "application/json");
-            var response = await client.PutAsync(string.Concat("http://192.168.0.104:3000/api",
+            var response = await client.PutAsync(string.Concat("http://192.168.0.104:3000/api/",
  id), content);
-            return JsonConvert.DeserializeObject<int>(response.Content.ReadAsStringAsync().Result);
         }
     }
 }
